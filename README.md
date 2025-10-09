@@ -11,11 +11,17 @@ This document provides comprehensive documentation for all RTL modules in the Mo
    - [tile_matmul_agu](#tile_matmul_agu)
    - [tile_base_controller](#tile_base_controller)
    - [tile_offsets_agu](#tile_offsets_agu)
-2. [Normalization Modules](#2-normalization-modules)
+2. [Lego Systolic Array](#2-lego-systolic-array)
+   - [PE (Processing Element)](#pe-processing-element)
+   - [SA_16x16](#sa_16x16)
+   - [SA_16x16_top](#sa_16x16_top)
+   - [TRSLL (Triangular Register Shift Logic)](#trsll-triangular-register-shift-logic)
+   - [Lego_Systolic_Array](#lego_systolic_array)
+3. [Normalization Modules](#3-normalization-modules)
    - [layer_norm1](#layer_norm1)
    - [layer_norm2](#layer_norm2)
    - [batch_norm](#batch_norm)
-3. [Activation Functions](#3-activation-functions)
+4. [Activation Functions](#4-activation-functions)
    - [swish](#swish)
 
 ---
@@ -265,7 +271,404 @@ The module implements an optimization to skip redundant A-matrix reads:
 
 ---
 
-# 2. Normalization Modules
+# 2. Lego Systolic Array
+
+The Lego Systolic Array is a weight-stationary systolic array architecture designed for efficient matrix multiplication. It features a hierarchical design with configurable array sizes and triangular register shifting for optimal data flow.
+
+## PE (Processing Element)
+
+> **Purpose:** Basic processing element implementing a multiply-accumulate (MAC) operation with weight-stationary dataflow.
+
+### Module Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `DATA_W` | int | 8 | Bit width of input activation and weight |
+| `DATA_W_OUT` | int | 32 | Bit width of partial sum output |
+
+### Port Signals
+
+| Port Name | Direction | Width | Type | Description |
+|-----------|-----------|-------|------|-------------|
+| **Clock and Reset** |||||
+| `clk` | Input | 1 | logic | System clock |
+| `rst_n` | Input | 1 | logic | Asynchronous reset (active low) |
+| **Control** |||||
+| `valid_in` | Input | 1 | logic | Input data valid signal |
+| `load_w` | Input | 1 | logic | Weight load enable (when high, loads new weight) |
+| `valid_out` | Output | 1 | logic | Output data valid signal (echoes valid_in) |
+| **Data Inputs** |||||
+| `in_act` | Input | `DATA_W` | logic | Input activation from left neighbor PE |
+| `in_psum` | Input | `DATA_W_OUT` | logic | Partial sum from top neighbor PE |
+| `weight_load` | Input | `DATA_W` | logic | New weight value to load |
+| **Data Outputs** |||||
+| `out_act` | Output | `DATA_W` | logic | Output activation to right neighbor PE |
+| `out_psum` | Output | `DATA_W_OUT` | logic | Output partial sum to bottom neighbor PE |
+
+### Functional Description
+
+**Weight-Stationary MAC Operation:**
+
+The PE implements a stationary weight dataflow where weights remain fixed while activations and partial sums flow through:
+
+1. **Weight Loading Phase (`load_w = 1`):**
+   ```
+   if (valid_in):
+       W_reg ← weight_load
+   ```
+
+2. **Computation Phase (`load_w = 0`):**
+   ```
+   mac_mul = in_act × W_reg
+   mac_res = mac_mul + in_psum
+   
+   if (valid_in):
+       act_reg ← in_act
+       psum_reg ← mac_res
+   ```
+
+3. **Output Propagation:**
+   ```
+   out_act = act_reg    (propagates right)
+   out_psum = psum_reg  (propagates down)
+   valid_out = valid_in
+   ```
+
+### Operation Modes
+
+| Mode | `load_w` | `valid_in` | Action |
+|------|----------|------------|--------|
+| **Weight Load** | 1 | 1 | Load new weight into W_reg, no computation |
+| **Compute** | 0 | 1 | MAC operation, propagate activation & psum |
+| **Idle** | X | 0 | No operation, outputs hold previous values |
+
+### Dataflow Pattern
+
+```
+         in_psum
+            ↓
+in_act → [ PE ] → out_act
+            ↓
+        out_psum
+```
+
+> **💡 Weight-Stationary Advantage:** By keeping weights stationary in each PE, the design minimizes weight memory accesses and power consumption. Weights are loaded once and reused for multiple activations.
+
+> **⚠️ Note:** The PE uses registered outputs, adding 1 cycle of latency. Systolic arrays leverage this pipelining for high throughput.
+
+---
+
+## SA_16x16
+
+> **Purpose:** 16×16 systolic array of PEs implementing matrix multiplication with configurable standalone/chaining mode.
+
+### Module Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `DATA_W` | int | 8 | Bit width of activations and weights |
+| `DATA_W_OUT` | int | 32 | Bit width of partial sums |
+| `SA_indiv` | int | 1 | Mode: 1=standalone (zero top psum), 0=chainable (use psum_in) |
+
+### Port Signals
+
+| Port Name | Direction | Width | Type | Description |
+|-----------|-----------|-------|------|-------------|
+| **Clock and Reset** |||||
+| `clk` | Input | 1 | logic | System clock |
+| `rst_n` | Input | 1 | logic | Asynchronous reset (active low) |
+| **Control** |||||
+| `load_w` | Input | 1 | logic | Weight loading phase enable |
+| `valid_in` | Input | 1 | logic | Input data valid signal |
+| `valid_out` | Output | 1 | logic | Output data valid signal |
+| **Activation Data** |||||
+| `act_in[16]` | Input | `DATA_W` × 16 | logic | Left edge activation inputs (one per row) |
+| `act_out[16]` | Output | `DATA_W` × 16 | logic | Right edge activation outputs (one per row) |
+| **Partial Sum Data** |||||
+| `psum_in[16]` | Input | `DATA_W_OUT` × 16 | logic | Top edge partial sum inputs (one per column) |
+| `psum_out[16]` | Output | `DATA_W_OUT` × 16 | logic | Bottom edge partial sum outputs (one per column) |
+| **Weight Data** |||||
+| `w_load[16][16]` | Input | `DATA_W` × 16 × 16 | logic | 2D array of weights for all PEs |
+
+### Array Structure
+
+The module instantiates a **16×16 grid** of PEs with the following interconnect pattern:
+
+```
+Row i, Column j:
+- Activation flows: Left → Right (horizontal)
+- Partial sum flows: Top → Bottom (vertical)
+- Each PE[i][j] receives:
+  - act_in[i] (if j=0) OR act_sig[i][j] (from left neighbor)
+  - psum_in[j] (if i=0 AND SA_indiv=0) OR psum_sig[i][j] (from top neighbor)
+  - w_load[i][j] (unique weight)
+```
+
+### Internal Interconnect Signals
+
+| Signal | Dimensions | Description |
+|--------|------------|-------------|
+| `act_sig[16][17]` | `DATA_W` × 16 × 17 | Activation interconnect (extra column for output) |
+| `psum_sig[17][16]` | `DATA_W_OUT` × 17 × 16 | Partial sum interconnect (extra row for output) |
+| `valid_sig[16][17]` | 1 × 16 × 17 | Valid signal propagation |
+
+### SA_indiv Mode Behavior
+
+| `SA_indiv` | Top Psum Source | Use Case |
+|------------|----------------|----------|
+| **1** | Force to 0 | Standalone array, computes full matrix result |
+| **0** | Use `psum_in[j]` | Chainable array, accumulates with previous results |
+
+### Matrix Multiplication Mapping
+
+For computing **C = A × B**:
+- **A matrix:** Rows fed to `act_in[0:15]`
+- **B matrix:** Weights loaded via `w_load[i][j]`
+- **C matrix:** Results collected from `psum_out[0:15]` after sufficient cycles
+
+**Computation Formula per PE:**
+```
+C[i][j] += A[i][k] × B[k][j]
+```
+
+Where the systolic array accumulates over K dimension as activations flow through.
+
+### Timing Characteristics
+
+- **Weight Load Time:** 1 cycle (broadcast to all PEs)
+- **First Output Latency:** 16 cycles (diagonal wavefront propagation)
+- **Peak Throughput:** 16 results per cycle (after initial latency)
+- **Total Cycles for 16×16:** ~31 cycles (16 initial + 15 propagation)
+
+> **💡 Performance:** The array can sustain 16×16 = 256 MAC operations per cycle at peak throughput, achieving high computational density.
+
+> **⚠️ Data Alignment:** Inputs must be properly skewed/aligned for correct matrix multiplication. Use with TRSLL module for automatic alignment.
+
+---
+
+## SA_16x16_top
+
+> **Purpose:** Wrapper integrating SA_16x16 with triangular register shifting logic (TRSLL) for proper input data alignment.
+
+### Module Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `DATA_W` | int | 8 | Bit width of activations and weights |
+| `DATA_W_OUT` | int | 32 | Bit width of partial sums |
+| `SA_indiv` | int | 1 | Standalone (1) or chainable (0) mode |
+
+### Port Signals
+
+| Port Name | Direction | Width | Type | Description |
+|-----------|-----------|-------|------|-------------|
+| **Clock and Reset** |||||
+| `clk` | Input | 1 | logic | System clock |
+| `rst_n` | Input | 1 | logic | Asynchronous reset (active low) |
+| **Control** |||||
+| `load_w` | Input | 1 | logic | Weight loading phase enable |
+| `valid_in` | Input | 1 | logic | Input data valid signal |
+| `valid_out` | Output | 1 | logic | Output data valid signal |
+| **Data Interface** |||||
+| `act_in[16]` | Input | `DATA_W` × 16 | logic | Unaligned activation inputs |
+| `act_out[16]` | Output | `DATA_W` × 16 | logic | Right edge activation outputs |
+| `psum_in[16]` | Input | `DATA_W_OUT` × 16 | logic | Top partial sum inputs |
+| `psum_out[16]` | Output | `DATA_W_OUT` × 16 | logic | Bottom partial sum outputs (results) |
+| `w_load[16][16]` | Input | `DATA_W` × 16 × 16 | logic | Weight matrix for all PEs |
+
+### Submodule Hierarchy
+
+```
+SA_16x16_top
+├── TRSLL (reg_shifted_right)
+│   └── Triangular shift registers for input alignment
+└── SA_16x16 (SA)
+    └── 16×16 array of PEs
+```
+
+### Functional Overview
+
+This module combines two critical components:
+
+1. **TRSLL (Triangular Register Shift Logic):**
+   - Aligns activation inputs with progressive delays
+   - Row 0 gets 0-cycle delay, Row 1 gets 1-cycle delay, ..., Row 15 gets 15-cycle delay
+   - Creates diagonal wavefront for correct matrix multiplication
+
+2. **SA_16x16 (Systolic Array Core):**
+   - Receives aligned activations from TRSLL
+   - Performs weight-stationary MAC operations
+   - Produces partial sum outputs
+
+### Data Flow
+
+```
+act_in[16] → [TRSLL] → act_TRSLL_SA[16] → [SA_16x16] → act_out[16]
+                                                ↓
+psum_in[16] ────────────────────────────→ psum_out[16]
+                                         (vertical flow)
+```
+
+### Why Triangular Shifting?
+
+**Problem:** Systolic arrays require temporally aligned data where element A[i][k] must meet weight B[k][j] at the correct PE at the correct time.
+
+**Solution:** TRSLL delays each row by its row index:
+- Row 0: No delay (0 cycles)
+- Row 1: 1 register (1 cycle delay)
+- Row 2: 2 registers (2 cycles delay)
+- ...
+- Row 15: 15 registers (15 cycles delay)
+
+This creates a diagonal wavefront where data arrives at PE[i][j] at time `i + j`.
+
+> **💡 Alignment Example:** For a 4×4 matrix, TRSLL creates this timing pattern:
+> ```
+> Time:  t=0  t=1  t=2  t=3
+> Row0: [a00][a01][a02][a03]
+> Row1:  --  [a10][a11][a12][a13]
+> Row2:  --   --  [a20][a21][a22][a23]
+> Row3:  --   --   --  [a30][a31][a32][a33]
+> ```
+> This ensures correct element alignment for matrix multiplication.
+
+---
+
+## TRSLL (Triangular Register Shift Logic)
+
+> **Purpose:** Creates triangular register delay structure for systolic array input alignment.
+
+### Module Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `DATAWIDTH` | int | 8 | Bit width of each data element |
+| `N_SIZE` | int | 16 | Array size (number of rows) |
+
+### Port Signals
+
+| Port Name | Direction | Width | Type | Description |
+|-----------|-----------|-------|------|-------------|
+| **Clock and Reset** |||||
+| `clk` | Input | 1 | logic | System clock |
+| `rst_n` | Input | 1 | logic | Asynchronous reset (active low) |
+| **Data Interface** |||||
+| `act_in[N_SIZE]` | Input | `DATAWIDTH` × `N_SIZE` | logic | Unaligned input activations |
+| `act_out[N_SIZE]` | Output | `DATAWIDTH` × `N_SIZE` | logic | Aligned output activations |
+
+### Register Array Structure
+
+**Total Registers:** `NUM_OF_REGS = (N_SIZE - 1) × N_SIZE / 2`
+
+For `N_SIZE=16`: **120 registers** arranged in triangular pattern:
+
+```
+Row 0: 0 registers  → act_out[0] = act_in[0] (no delay)
+Row 1: 1 register   → act_out[1] delayed by 1 cycle
+Row 2: 2 registers  → act_out[2] delayed by 2 cycles
+Row 3: 3 registers  → act_out[3] delayed by 3 cycles
+...
+Row 15: 15 registers → act_out[15] delayed by 15 cycles
+```
+
+### Register Indexing Formula
+
+For row `k` (k=1 to N_SIZE-1):
+- **Base index:** `base = k × (k - 1) / 2`
+- **First register:** `reg_shifted[base + 1]` (directly from `act_in[k]`)
+- **Last register:** `reg_shifted[base + k]` (feeds `act_out[k]`)
+- **Chain:** Each register shifts into the next
+
+### Delay Pattern Visualization
+
+For 4×4 array (N_SIZE=4):
+
+```
+act_in[0] ────────────────────────────→ act_out[0]  (0 cycles)
+
+act_in[1] ──[reg1]────────────────────→ act_out[1]  (1 cycle)
+
+act_in[2] ──[reg2]──[reg3]────────────→ act_out[2]  (2 cycles)
+
+act_in[3] ──[reg4]──[reg5]──[reg6]────→ act_out[3]  (3 cycles)
+```
+
+### Generate Logic Structure
+
+The module uses nested `generate` blocks:
+
+1. **Outer loop (k):** Iterates over rows 1 to N_SIZE-1
+2. **First column register:** Captures input from `act_in[k]`
+3. **Depth registers:** Chain of shift registers for rows with k>1
+4. **Output assignment:** Last register in chain feeds `act_out[k]`
+
+### Register Count by Array Size
+
+| Array Size | Total Registers | Formula |
+|------------|----------------|---------|
+| 4×4 | 6 | (3×4)/2 = 6 |
+| 8×8 | 28 | (7×8)/2 = 28 |
+| 16×16 | 120 | (15×16)/2 = 120 |
+| 32×32 | 496 | (31×32)/2 = 496 |
+
+> **💡 Hardware Cost:** The triangular structure uses fewer registers than a full rectangular delay buffer. For N=16, this saves 120 vs. 136 registers (if using N registers per row).
+
+> **⚠️ Latency Impact:** The TRSLL adds up to (N_SIZE-1) cycles of latency. For a 16×16 array, this adds 15 additional cycles before the first output appears.
+
+---
+
+## Lego_Systolic_Array
+
+> **Purpose:** Top-level systolic array module instantiating multiple 16×16 arrays for larger matrix operations. *(Currently under development)*
+
+### Module Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `DATA_W` | int | 8 | Bit width of activations and weights |
+| `DATA_W_OUT` | int | 32 | Bit width of partial sums |
+| `SA_indiv` | int | 1 | Standalone (1) or chainable (0) mode |
+
+### Port Signals
+
+| Port Name | Direction | Width | Type | Description |
+|-----------|-----------|-------|------|-------------|
+| **Clock and Reset** |||||
+| `clk` | Input | 1 | logic | System clock |
+| `rst_n` | Input | 1 | logic | Asynchronous reset (active low) |
+| **Control** |||||
+| `load_w` | Input | 1 | logic | Weight loading phase enable |
+| `valid_in` | Input | 1 | logic | Input data valid signal |
+| `TYPE_Lego` | Input | 2 | logic | Configuration type for Lego architecture |
+| `valid_out` | Output | 1 | logic | Output data valid signal |
+| **Data Interface** |||||
+| `act_in[64]` | Input | `DATA_W` × 64 | logic | Left edge activations (64 rows) |
+| `w_load[32][32]` | Input | `DATA_W` × 32 × 32 | logic | Weight matrix (32×32) |
+| `psum_out[32]` | Output | `DATA_W_OUT` × 32 | logic | Bottom edge partial sum outputs |
+
+### Architecture Overview
+
+The module instantiates **4× SA_16x16_top** instances:
+- `SA_1`, `SA_2`, `SA_3`, `SA_4`
+- Intended for configurable Lego-style tiling
+- Allows construction of larger arrays or different topologies
+
+### Configuration Types (TYPE_Lego)
+
+| `TYPE_Lego` | Configuration | Description |
+|-------------|---------------|-------------|
+| `2'b00` | Single 16×16 | Use SA_1 only *(planned)* |
+| `2'b01` | 2× 16×16 | Use SA_1, SA_2 *(planned)* |
+| `2'b10` | 32×16 or 16×32 | Horizontal/vertical tiling *(planned)* |
+| `2'b11` | 4× 16×16 | Full 32×32 array *(planned)* |
+
+> **⚠️ Development Status:** This module is currently incomplete. The control logic (`Lego_control_unit`) and proper interconnect between sub-arrays are under development. The `TYPE_Lego` parameter is declared but not yet implemented.
+
+> **💡 Design Intent:** The Lego architecture aims to provide flexibility in array size/shape by dynamically connecting smaller 16×16 building blocks based on matrix dimensions and throughput requirements.
+
+---
+
+# 3. Normalization Modules
 
 ## layer_norm1
 
@@ -487,7 +890,7 @@ Where:
 
 ---
 
-# 3. Activation Functions
+# 4. Activation Functions
 
 ## swish
 
@@ -596,6 +999,11 @@ For 8-bit signed input range [-128, 127]:
 | `tile_matmul_agu` | Controller | Yes | N/A | Top-level tile iterator |
 | `tile_base_controller` | Controller | Yes | N/A | Tile address calculator |
 | `tile_offsets_agu` | AGU | Yes | 0 cycles | Element address generator |
+| `PE` | Compute | Yes | 1 cycle | MAC processing element |
+| `SA_16x16` | Compute Array | Yes | 16 cycles | 16×16 systolic array core |
+| `SA_16x16_top` | Compute Array | Yes | 31 cycles | Array with input alignment |
+| `TRSLL` | Data Alignment | Yes | 0-15 cycles | Triangular register shifter |
+| `Lego_Systolic_Array` | Compute Array | Yes | TBD | Multi-array configuration *(dev)* |
 | `layer_norm1` | Normalization | Yes | ~12 cycles | Sequential layer norm with FSM |
 | `layer_norm2` | Normalization | No | 0 cycles | Combinational layer norm |
 | `batch_norm` | Normalization | Yes | 1 cycle | Batch norm affine transform |
