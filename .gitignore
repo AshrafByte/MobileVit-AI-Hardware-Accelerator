@@ -1,0 +1,118 @@
+# -------------------------------------
+# VS Code
+# -------------------------------------
+.vscode/
+*.code-workspace
+*.log
+
+# Sigasi Studio
+.sigasi-db/
+.project
+.settings/
+.buildpath
+
+# VS Code Sigasi plugin
+*.svadata/
+*.svd/
+
+# -------------------------------------
+# QuestaSim / ModelSim
+# -------------------------------------
+work/
+vsim.wlf
+transcript
+*.vcd
+*.wlf
+*.ucdb
+*.sdf
+*.vstf
+*.mti
+
+# Questa/ModelSim INI files
+modelsim.ini
+*.ini
+*.bak
+*.rpt
+
+# -------------------------------------
+# Quartus (Intel FPGA)
+# -------------------------------------
+*.rpt
+*.qsf
+*.qpf
+*.sdc
+*.smsg
+*.jdi
+*.sso
+*.pof
+*.sof
+*.jam
+*.hex
+*.hps
+*.sld
+*.pin
+*.map
+*.ttf
+*.jbc
+*.aocx
+*.qws
+*.summary
+
+db/
+incremental_db/
+output_files/
+simulation/modelsim/
+
+# -------------------------------------
+# Vivado (Xilinx FPGA)
+# -------------------------------------
+*.jou
+*.log
+*.str
+*.cache
+*.runs
+*.hw
+*.ip_user_files
+*.sim
+*.srcs
+*.webtalk
+*.xpr
+*.xsd
+*.xmsgs
+
+# Vivado-generated directories
+.cache/
+.hw/
+.sim/
+.xpr/
+.xgui/
+.gen/
+*.pb
+
+# -------------------------------------
+# TersoHDL (if generating JSON or temp data)
+# -------------------------------------
+*.json
+*.terso_cache/
+
+# -------------------------------------
+# General
+# -------------------------------------
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+*.bak
+
+# OS/IDE clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Auto-generated memory/data files
+*.mem
+inst.mem
+
+
+.library_mapping.xml
