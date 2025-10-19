@@ -1,28 +1,39 @@
 
+
 module SA_16x16 #(
-    parameter DATA_W = 8, parameter DATA_W_OUT = 32, SA_indiv = 1 
+    parameter DATA_W = 8, parameter DATA_W_OUT = 32
 )(
 input  logic                    clk                 ,
 input  logic                    rst_n               ,
-input  logic                    load_w              ,   // load weight phase
-input  logic [DATA_W-1:0]       act_in  [16]        ,   // left edge activations
-input  logic [DATA_W_OUT-1:0]   psum_in [16]        ,   // top input psums
-input  logic [DATA_W-1:0]       w_load  [16][16]    ,   // weights for each PE
-input  logic                    valid_in            ,           
-
-output logic [DATA_W-1:0]       act_out [16]        ,   // right edge activations
-output logic [DATA_W_OUT-1:0]   psum_out[16]        ,   // bottom edge partial sums
-output logic                    valid_out
+input  logic [DATA_W-1:0]       act_in  [16]        ,     
+input  logic [DATA_W-1:0]       weight_in [16]      ,
+input  logic                    load_w              ,    
+input  logic                    transpose_en        ,    
+  
+output logic [DATA_W_OUT-1:0]   psum_out[16]        
 );
 
 // Internal interconnect signals
 logic   [DATA_W-1:0]        act_sig             [16][17]          ;       // extra column for right output
+logic   [DATA_W-1:0]        weight_D_sig        [17][16]          ;
+logic   [DATA_W-1:0]        weight_L_sig        [16][17]          ;
 logic   [DATA_W_OUT-1:0]    psum_sig            [17][16]          ;       // extra row for bottom output
-logic                       valid_sig           [16][17]            ;
 
-assign valid_sig[0][0] = valid_in;              // Not Now (with controllel)
 
+
+
+genvar k ;
 genvar i,j ;
+
+generate;
+    for (k=0 ; k<16; k++)
+    begin
+        assign act_sig[k][0]    = act_in[k] ;
+        assign psum_sig[0][k]   = '0    ;
+        assign weight_D_sig[16][k] = weight_in[k] ;
+        assign weight_L_sig[k][16] = weight_in[k]; 
+    end
+endgenerate
 
 generate;
     for (i = 0 ;i < 16;i++) begin :Row 
@@ -30,21 +41,20 @@ generate;
             PE #(.DATA_W(DATA_W),.DATA_W_OUT(DATA_W_OUT)) u_pe (
                 .clk(clk),
                 .rst_n(rst_n),
-                .valid_in(valid_sig[i][j]),     // Not Now (with controllel)
-                .in_act((j==0) ? act_in[i] : act_sig[i][j]),
-                .in_psum((i==0) ? ((SA_indiv) ? '0 :psum_in[j]) : psum_sig[i][j]),
-                .weight_load(w_load[i][j]),
+                .in_act(act_sig[i][j]),
+                .in_psum(psum_sig[i][j]),
+                .w_in_down(weight_D_sig[i+1][j]),
+                .w_in_left(weight_L_sig[i][j+1]),
                 .load_w(load_w),
+                .transpose_en(transpose_en),
                 .out_act(act_sig[i][j+1]),
                 .out_psum(psum_sig[i+1][j]),
-                .valid_out(valid_sig[i][j+1])   // Not Now (with controllel)
+                .w_out_up(weight_D_sig[i][j]),
+                .w_out_right(weight_L_sig[i][j])
             );
         end
     end
 
-    // Right & bottom boundary connections
-    for (i=0; i<16; i++) assign act_out[i]  = act_sig[i][16];
     for (j=0; j<16; j++) assign psum_out[j] = psum_sig[16][j];
-    assign valid_out = valid_sig[15][16];      // Not Now (with controllel)
 endgenerate
 endmodule
