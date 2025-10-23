@@ -416,19 +416,19 @@ Estimated Utilization: 2.5 GB/s / 4 GB/s = ~60-65%
 
 ### **6.1 RTL Module Summary**
 
-| Module | Lines of Code | Function | Status |
-|--------|--------------|----------|--------|
-| `mobilevit_accelerator_top.sv` | 500 | Top-level integration | ✅ Complete |
-| `global_controller.sv` | 800 | FSM orchestration | ✅ Complete |
-| `dma_wrapper.sv` | 400 | AXI Master interface | ✅ Complete |
-| `memory_subsystem.sv` | 600 | 16-bank SRAM | ✅ Complete |
-| `Lego_Systolic_Array.sv` | 2000 | Compute engine | ✅ Complete |
-| `post_processing_pipeline.sv` | 300 | BN/Swish/LN | ✅ Complete |
-| `AGU.sv` | 700 | Address generation | ✅ Complete |
-| `batch_norm.sv` | 250 | Normalization | ✅ Complete |
-| `swish.sv` | 200 | Activation | ✅ Complete |
-| `layer_norm1.sv` / `layer_norm2.sv` | 400 | Normalization | ✅ Complete |
-| **TOTAL** | **~8,000** | 11 modules | **100% Complete** |
+| Module | Lines of Code | Function | 
+|--------|--------------|----------|
+| `mobilevit_accelerator_top.sv` | 500 | Top-level integration | 
+| `global_controller.sv` | 800 | FSM orchestration | 
+| `dma_wrapper.sv` | 400 | AXI Master interface | 
+| `memory_subsystem.sv` | 600 | 16-bank SRAM | 
+| `Lego_Systolic_Array.sv` | 2000 | Compute engine | 
+| `post_processing_pipeline.sv` | 300 | BN/Swish/LN | 
+| `AGU.sv` | 700 | Address generation | 
+| `batch_norm.sv` | 250 | Normalization | 
+| `swish.sv` | 200 | Activation | 
+| `layer_norm1.sv` / `layer_norm2.sv` | 400 | Normalization | 
+| **TOTAL** | **~8,000** | 11 modules | 
 
 ---
 
