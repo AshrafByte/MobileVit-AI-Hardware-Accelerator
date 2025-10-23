@@ -564,54 +564,6 @@ endcase
 | **Integration Tests** | Full system | ⏳ Pending | Requires simulation |
 | **FPGA Synthesis** | 250 MHz target | ⏳ Not Started | Future work |
 
-**What We Completed**:
-- ✅ Complete RTL design (~8,000 lines of SystemVerilog)
-- ✅ Architectural documentation with design rationale
-- ✅ Unit testbench structure
-- ✅ Golden reference Python model
-
-**What Remains**:
-- ⏳ Functional simulation and verification
-- ⏳ FPGA synthesis and timing closure
-- ⏳ Performance measurement and validation
-- ⏳ Power analysis and optimization
-
----
-
-### **8.2 Learning Outcomes**
-
-Through this research project, we gained hands-on experience in:
-
-1. **MobileViT Accelerator Architecture**
-   - Studied hybrid CNN-Transformer acceleration challenges
-   - Designed complete RTL implementation
-   - Learned trade-offs in hardware design decisions
-
-2. **Memory System Design**
-   - 16-bank architecture for parallel access
-   - Banking strategy and address interleaving
-   - Ping-pong buffering for overlap
-
-3. **SystemVerilog RTL Design**
-   - ~8,000 lines of synthesizable code
-   - Modular design with clear interfaces
-   - Design for testability
-
-4. **Hardware-Software Co-Design**
-   - Descriptor-based programming interface
-   - Hardware/software partitioning decisions
-   - Understanding acceleration limits
-
-5. **Performance Modeling**
-   - Cycle estimation methodologies
-   - Bandwidth analysis
-   - Bottleneck identification
-
-6. **Technical Communication**
-   - Comprehensive documentation (15,000+ words)
-   - Design decision justification
-   - Architecture visualization
-
 ---
 
 ## 9. Limitations & Future Work
@@ -683,8 +635,7 @@ This graduation/research project presents a **hardware accelerator design** for 
 ### **Project Status & Outcomes**
 
 **Completed Work**:
-- ✅ **RTL Design**: ~8,000 lines of SystemVerilog across 11 modules
-- ✅ **Architecture Documentation**: 7 documents with 15,000+ words covering design decisions
+- ✅ **RTL Design**: 11 modules
 - ✅ **Performance Modeling**: Cycle estimation and bandwidth analysis methodology
 - ✅ **Testbench Structure**: Unit test framework for all modules
 
@@ -737,7 +688,6 @@ This project demonstrates:
 **⚠️ Important**: These are design-time estimates assuming ideal conditions. Actual numbers require FPGA implementation and measurement.
 
 ### **RTL Module Summary**
-- **11 RTL modules**: ~8,000 lines total
 - **16-bank memory**: 32-bit width per bank
 - **Systolic array**: 16×16 PEs, Lego reconfigurable
 - **Post-processing**: BN → Swish → LayerNorm (3-stage pipeline)
