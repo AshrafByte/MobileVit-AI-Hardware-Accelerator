@@ -1,0 +1,1229 @@
+<!DOCTYPE html><html><head>
+      <title>PRESENTATION</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="mobilevit-hardware-accelerator">MobileViT Hardware Accelerator </h1>
+<h2 id="design-presentation">Design Presentation </h2>
+<p><strong>Target</strong>: MobileViT-XXS Neural Network Inference Acceleration</p>
+<hr>
+<h2 id="️-research-project-disclaimer">⚠️ Research Project Disclaimer </h2>
+<p><strong>This is a student graduation/research project focused on RTL design and hardware architecture exploration.</strong></p>
+<p><strong>Project Status</strong>:</p>
+<ul>
+<li>✅ RTL design completed (~8,000 lines of SystemVerilog)</li>
+<li>✅ Architecture documented with design decisions</li>
+<li>⏳ Functional simulation pending</li>
+<li>⏳ FPGA synthesis and implementation not yet performed</li>
+<li>⏳ Performance measurements not yet obtained</li>
+</ul>
+<p><strong>All performance metrics in this document are theoretical estimates</strong> based on:</p>
+<ul>
+<li>Hand calculations of cycle counts</li>
+<li>Idealized assumptions (no stalls, perfect ping-pong overlap, no handshaking delays)</li>
+<li>Design parameters without real-world validation</li>
+</ul>
+<p><strong>Actual performance will differ</strong> due to:</p>
+<ul>
+<li>Pipeline stalls and bubbles</li>
+<li>Memory access conflicts</li>
+<li>Handshaking and control overhead</li>
+<li>FPGA timing constraints</li>
+<li>Real-world data dependencies</li>
+</ul>
+<p>This work represents our learning in digital design, computer architecture, and ML hardware acceleration concepts.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents </h2>
+<ol>
+<li><a href="#1-executive-summary">Executive Summary</a></li>
+<li><a href="#2-design-objectives">Design Objectives</a></li>
+<li><a href="#3-architecture-overview">Architecture Overview</a></li>
+<li><a href="#4-key-design-decisions">Key Design Decisions</a></li>
+<li><a href="#5-performance-analysis">Performance Analysis</a></li>
+<li><a href="#6-technical-implementation">Technical Implementation</a></li>
+<li><a href="#7-verification-strategy">Verification Strategy</a></li>
+<li><a href="#8-results--achievements">Results &amp; Achievements</a></li>
+<li><a href="#9-limitations--future-work">Limitations &amp; Future Work</a></li>
+<li><a href="#10-conclusion">Conclusion</a></li>
+</ol>
+<hr>
+<h2 id="1-executive-summary">1. Executive Summary </h2>
+<h3 id="what-we-built"><strong>What We Built</strong> </h3>
+<p>A hardware accelerator design for <strong>MobileViT-XXS</strong> neural network inference, featuring:</p>
+<ul>
+<li><strong>11 RTL modules</strong> (~8,000 lines of SystemVerilog)</li>
+<li><strong>Descriptor-driven architecture</strong> (inspired by industry approaches)</li>
+<li><strong>16-bank memory subsystem</strong> (160 KB SRAM, FPGA-optimized)</li>
+<li><strong>Systolic array compute engine</strong> (16×16 PEs, Lego reconfigurable)</li>
+<li><strong>Integrated post-processing</strong> (BN → Swish → LayerNorm pipeline)</li>
+</ul>
+<h3 id="design-targets"><strong>Design Targets</strong> </h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Estimated (Design Calculation)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Latency</strong></td>
+<td>&lt;15 ms</td>
+<td><strong>~10.5 ms</strong></td>
+<td>Idealized cycle count ÷ clock freq</td>
+</tr>
+<tr>
+<td><strong>Peak Throughput</strong></td>
+<td>&gt;60 GOPS</td>
+<td><strong>64 GOPS</strong></td>
+<td>256 MACs × 250 MHz (theoretical peak)</td>
+</tr>
+<tr>
+<td><strong>FPS</strong></td>
+<td>&gt;60 FPS</td>
+<td><strong>~95 FPS</strong></td>
+<td>Derived from estimated latency</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>&lt;200 KB</td>
+<td><strong>160 KB</strong></td>
+<td>Design specification</td>
+</tr>
+<tr>
+<td><strong>Hardware Coverage</strong></td>
+<td>Most MobileViT ops</td>
+<td><strong>~85% HW</strong></td>
+<td>Softmax, Residual in SW</td>
+</tr>
+<tr>
+<td><strong>Bandwidth</strong></td>
+<td>Sufficient</td>
+<td><strong>~2.5 GB/s avg</strong></td>
+<td>Rough estimate from data movement</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important Notes</strong>:</p>
+<ul>
+<li>All numbers are <strong>theoretical estimates</strong> from design calculations, not measurements</li>
+<li>Cycle counts assume <strong>ideal conditions</strong> (no stalls, no conflicts, perfect scheduling)</li>
+<li><strong>Actual performance requires</strong> FPGA synthesis, implementation, and testing</li>
+<li>These estimates serve as design targets for future implementation</li>
+</ul>
+<hr>
+<h2 id="2-design-objectives">2. Design Objectives </h2>
+<h3 id="primary-goal"><strong>Primary Goal</strong> </h3>
+<p>Design a hardware accelerator capable of executing the complete <strong>MobileViT-XXS</strong> neural network for efficient image classification on resource-constrained edge devices.</p>
+<h3 id="intended-applications"><strong>Intended Applications</strong> </h3>
+<ul>
+<li>Edge computing (IoT cameras, smart sensors)</li>
+<li>Embedded systems (robotics, drones)</li>
+<li>Real-time vision tasks (object detection, classification)</li>
+</ul>
+<p><strong>Note</strong>: These are potential applications based on the design targets. Actual deployment would require further optimization and validation.</p>
+<h3 id="design-constraints"><strong>Design Constraints</strong> </h3>
+<ol>
+<li><strong>Performance</strong>: Target &gt;60 GOPS, &lt;15 ms latency (typical for edge AI)</li>
+<li><strong>Power</strong>: Aim for &lt;5W (suitable for edge deployment)</li>
+<li><strong>Area</strong>: Design to fit in mid-range FPGA (Xilinx Zynq UltraScale+)</li>
+<li><strong>Flexibility</strong>: Support major MobileViT layer types</li>
+<li><strong>Bandwidth</strong>: Use standard 64-bit DDR interface</li>
+</ol>
+<h3 id="why-mobilevit"><strong>Why MobileViT?</strong> </h3>
+<ul>
+<li><strong>State-of-the-art</strong>: Combines CNNs and Transformers</li>
+<li><strong>Efficient</strong>: 2-3× fewer parameters than traditional ViT</li>
+<li><strong>Accurate</strong>: Competitive accuracy on ImageNet</li>
+<li><strong>Challenging</strong>: Tests both convolution and attention acceleration</li>
+</ul>
+<hr>
+<h2 id="3-architecture-overview">3. Architecture Overview </h2>
+<h3 id="block-diagram"><strong>Block Diagram</strong> </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>┌─────────────────────────────────────────────────────────────────┐
+│                    MobileViT Accelerator Top                    │
+│                                                                 │
+│  ┌──────────────┐    ┌──────────────────────────────────┐       │
+│  │   AXI Host   │◄──►│     Global Controller (FSM)      │       │
+│  │  Interface   │    │  • 16 states                     │       │
+│  │ • Registers  │    │  • Ping-pong orchestration       │       │
+│  │ • Descriptors│    │  • Layer sequencing              │       │
+│  └──────────────┘    └──────────────────────────────────┘       │
+│         │                          │                            │
+│         ▼                          ▼                            │
+│  ┌──────────────┐    ┌─────────────────────────────────────┐    │
+│  │  DMA Wrapper │◄──►│    Memory Subsystem (160 KB)        │    │
+│  │  AXI Master  │    │  • ActBufA/B (32KB each, ping-pong) │    │
+│  │  64-bit bus  │    │  • WgtBuf (32KB)                    │    │
+│  │              │    │  • PSumBuf (64KB)                   │    │
+│  └──────────────┘    │  • 16-bank × 32-bit architecture    │    │
+│                      └─────────────────────────────────────┘    │
+│                                   │                             │
+│                                   ▼                             │
+│              ┌────────────────────────────────────┐             │
+│              │    Systolic Array (16×16 PEs)      │             │
+│              │  • Lego modes: 16×64, 32×32, 64×16 │             │
+│              │  • Weight-stationary dataflow      │             │
+│              │  • INT8 MACs, 409.6 GOPS peak      │             │
+│              └────────────────────────────────────┘             │
+│                                   │                             │
+│                                   ▼                             │
+│         ┌───────────────────────────────────────┐               │
+│         │   Post-Processing Pipeline (3 stages) │               │
+│         │   Batch Norm → Swish → Layer Norm     │               │
+│         │   (16 elements/cycle throughput)      │               │
+│         └───────────────────────────────────────┘               │
+│                                   │                             │
+│                                   ▼                             │
+│                      Writeback to DRAM via DMA                  │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre><h3 id="key-components"><strong>Key Components</strong> </h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Function</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Global Controller</strong></td>
+<td>FSM orchestration</td>
+<td>16 states, ping-pong control, layer sequencing</td>
+</tr>
+<tr>
+<td><strong>DMA Wrapper</strong></td>
+<td>External memory interface</td>
+<td>AXI4 Master, 64-bit @ 250 MHz, 2 GB/s per direction</td>
+</tr>
+<tr>
+<td><strong>Memory Subsystem</strong></td>
+<td>On-chip SRAM</td>
+<td>160 KB, 16-bank × 32-bit, ping-pong buffers</td>
+</tr>
+<tr>
+<td><strong>Systolic Array</strong></td>
+<td>Compute engine</td>
+<td>16×16 PEs, Lego modes, weight-stationary</td>
+</tr>
+<tr>
+<td><strong>Post-Processing</strong></td>
+<td>Activation &amp; normalization</td>
+<td>BN, Swish, LayerNorm pipeline</td>
+</tr>
+<tr>
+<td><strong>AGU</strong></td>
+<td>Address generation</td>
+<td>Tile indices, offsets, bank selection</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-key-design-decisions">4. Key Design Decisions </h2>
+<h3 id="decision-1-descriptor-driven-architecture"><strong>Decision 1: Descriptor-Driven Architecture</strong> </h3>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>Decouples software from hardware timing</li>
+<li>Hardware can execute autonomously after descriptor configuration</li>
+<li>Inspired by industry approaches (ARM Mali, NVIDIA DLA - from literature study)</li>
+<li>Simplifies software interface design</li>
+</ul>
+<p><strong>Implementation</strong>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Descriptor Format (256-bit):
+┌──────────────────────────────────────────────────────┐
+│ Layer Type | Dimensions | Addresses | Flags          │
+│  [7:0]    | [95:8]     | [223:96]  | [255:224]       │
+└──────────────────────────────────────────────────────┘
+
+CPU writes descriptor → Hardware reads → Executes → Interrupt
+</code></pre><p><strong>Benefits</strong>:</p>
+<ul>
+<li>Reduces CPU involvement once descriptor is configured</li>
+<li>Enables potential layer chaining in future</li>
+<li>Extensible for new layer types</li>
+</ul>
+<hr>
+<h3 id="decision-2-16-bank-memory-subsystem"><strong>Decision 2: 16-Bank Memory Subsystem</strong> </h3>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li><strong>32-bit banks</strong> match industry standards (AXI/AHB/APB)</li>
+<li><strong>16 banks</strong> provide 64 elements/cycle (matches SA width)</li>
+<li><strong>FPGA-friendly</strong>: Only 16 read ports (vs 64 in alternative designs)</li>
+<li><strong>Variable activation</strong>: 16/8/4 banks for different SA modes</li>
+</ul>
+<p><strong>Architecture</strong>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>┌──────────────────────────────────────────────────────┐
+│  Bank 0   Bank 1   Bank 2   ...   Bank 15            │
+│  32-bit   32-bit   32-bit   ...   32-bit             │
+│ [E3|E2|  [E7|E6|  [E11|E10| ... [E63|E62|            │ 
+│  E1|E0]   E5|E4]   E9|E8]        E61|E60]            │
+└──────────────────────────────────────────────────────┘
+    4 elem    4 elem    4 elem  ...    4 elem
+         = 64 elements in 1 cycle (parallel read)
+</code></pre><p><strong>Performance</strong>:</p>
+<ul>
+<li>Designed for single-cycle tile reads for all SA configurations</li>
+<li><strong>Expected</strong> throughput improvement over sequential access (pending verification)</li>
+<li>Efficient BRAM utilization (~40 blocks for 160 KB estimated)</li>
+</ul>
+<hr>
+<h3 id="decision-3-ping-pong-buffering"><strong>Decision 3: Ping-Pong Buffering</strong> </h3>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>Designed to overlap DMA load with SA computation</li>
+<li><strong>Intended</strong> to reduce latency vs serial execution</li>
+<li>Essential for bandwidth-limited layers</li>
+<li>Standard technique in ML accelerators (from literature)</li>
+</ul>
+<p><strong>Timeline</strong>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Without Ping-Pong (Sequential):
+[Load Tile 0] → [Compute Tile 0] → [Load Tile 1] → [Compute Tile 1] → ...
+      100 cycles      200 cycles       100 cycles      200 cycles
+              Total: 300 cycles per tile
+
+With Ping-Pong (Designed Behavior):
+[Load Tile 0] → [Load Tile 1 | Compute Tile 0] → [Load Tile 2 | Compute Tile 1] → ...
+   100 cycles         200 cycles                      200 cycles
+              Expected: 200 cycles per tile (after initial load)
+                        = 33% time savings (if overlap is perfect)
+</code></pre><p><strong>Intended Benefits</strong>:</p>
+<ul>
+<li>Hide DMA latency behind computation</li>
+<li>Increase effective compute utilization</li>
+<li>Reduce total inference latency</li>
+</ul>
+<p><strong>Note</strong>: Actual overlap depends on data dependencies and control logic correctness.</p>
+<hr>
+<h3 id="decision-4-multi-tile-accumulation"><strong>Decision 4: Multi-Tile Accumulation</strong> </h3>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>Systolic array is <strong>16-wide</strong>, but MobileViT uses <strong>16-384 channels</strong></li>
+<li>Need to process input channels in tiles and accumulate results</li>
+<li>Alternative: larger SA (expensive) or software stitching (slow)</li>
+</ul>
+<p><strong>Strategy</strong>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>For C_in = 48:
+  Tile 0: Process channels [0:15]   → Fresh write to PSumBuf
+  Tile 1: Process channels [16:31]  → Read PSumBuf, accumulate, write back
+  Tile 2: Process channels [32:47]  → Read PSumBuf, accumulate, write back
+  
+  Result: Accumulated output for all 48 input channels
+</code></pre><p><strong>Implementation</strong>:</p>
+<ul>
+<li>FSM tracks tile index and accumulation mode</li>
+<li>Memory subsystem supports partial sum readback</li>
+<li>Post-processing applied only after final tile</li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li>Design supports arbitrary channel depths</li>
+<li>No hardware oversizing needed</li>
+<li>Efficient use of on-chip buffers</li>
+</ul>
+<hr>
+<h3 id="decision-5-integrated-post-processing"><strong>Decision 5: Integrated Post-Processing</strong> </h3>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>Apply <strong>BN → Swish → LayerNorm</strong> pipeline before writeback</li>
+<li>Intended to save DRAM round-trip (no need to read back, process in CPU, write again)</li>
+<li>Reduces quantization error (keeps higher precision internally until final output)</li>
+<li>Common practice in ML accelerators (from literature)</li>
+</ul>
+<p><strong>Pipeline</strong>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>SA Output (INT32) → Batch Norm → Swish → Layer Norm → INT8 → Writeback
+      256 bits       16 elem     16 elem    16 elem    128 bits
+                    (3-stage pipeline, throughput goal: 1 output per cycle after fill)
+</code></pre><p><strong>Intended Benefits</strong>:</p>
+<ul>
+<li>Eliminates up to 3 DRAM accesses per layer</li>
+<li>Maintains higher precision during computation</li>
+<li>Each stage can be bypassed via descriptor flags</li>
+</ul>
+<hr>
+<h2 id="5-performance-analysis">5. Performance Analysis </h2>
+<p><strong>⚠️ Important</strong>: All metrics below are <strong>theoretical estimates</strong> from hand calculations assuming ideal conditions. Actual performance requires FPGA implementation and measurement.</p>
+<h3 id="51-latency-breakdown"><strong>5.1 Latency Breakdown</strong> </h3>
+<p><strong>Target Network</strong>: MobileViT-XXS (256×256×3 input → 1×1×1000 output)</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Operations</th>
+<th>Cycles (Estimated)</th>
+<th>Time @ 250 MHz</th>
+<th>% of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stem</strong></td>
+<td>Conv 3×3</td>
+<td>~36,000</td>
+<td>~0.14 ms</td>
+<td>1.4%</td>
+</tr>
+<tr>
+<td><strong>Stage 1-2</strong></td>
+<td>MV2 blocks ×4</td>
+<td>~212,000</td>
+<td>~0.85 ms</td>
+<td>8.1%</td>
+</tr>
+<tr>
+<td><strong>Stage 3-5</strong></td>
+<td>MV2 + MobileViT</td>
+<td>~2,345,000</td>
+<td>~9.38 ms</td>
+<td>89.3%</td>
+</tr>
+<tr>
+<td><strong>Classifier</strong></td>
+<td>Global Pool + FC</td>
+<td>~11,300</td>
+<td>~0.05 ms</td>
+<td>0.4%</td>
+</tr>
+<tr>
+<td><strong>Software (Softmax)</strong></td>
+<td>CPU fallback</td>
+<td>~21,872</td>
+<td>~0.09 ms</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td>~150 operations</td>
+<td><strong>~2,626,172</strong></td>
+<td><strong>~10.5 ms</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methodology</strong>:</p>
+<ul>
+<li>Cycle counts estimated from: (Output_H × Output_W × C_out × K_H × K_W × C_in) / (PE_array_width)</li>
+<li>Assumes <strong>ideal</strong> conditions: no stalls, perfect data availability, full SA utilization</li>
+<li><strong>Real cycle counts will be higher</strong> due to: pipeline fills, bank conflicts, control overhead</li>
+</ul>
+<p><strong>Key Observations</strong>:</p>
+<ul>
+<li>~89% of time in <strong>transformer blocks</strong> (expected for MobileViT architecture)</li>
+<li>Conv layers relatively fast due to high SA utilization potential</li>
+<li>Softmax overhead minimal if done in software (~0.8%)</li>
+</ul>
+<p><strong>Estimated Throughput</strong>: 10.5 ms per image ≈ <strong>~95 FPS</strong> (theoretical, assuming continuous feed)</p>
+<hr>
+<h3 id="52-compute-efficiency"><strong>5.2 Compute Efficiency</strong> </h3>
+<p><strong>Per-Operation Efficiency</strong> (Estimated SA utilization potential):</p>
+<table>
+<thead>
+<tr>
+<th>Operation Type</th>
+<th>Estimated SA Utilization</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conv 3×3</strong></td>
+<td>60-80% (goal)</td>
+<td>High potential with good data reuse</td>
+</tr>
+<tr>
+<td><strong>Conv 1×1</strong></td>
+<td>40-60% (goal)</td>
+<td>Lower due to less data reuse</td>
+</tr>
+<tr>
+<td><strong>Transformer MatMul</strong></td>
+<td>50-70% (goal)</td>
+<td>Q×K^T, Attention×V operations</td>
+</tr>
+<tr>
+<td><strong>Depthwise Conv</strong></td>
+<td>20-40% (goal)</td>
+<td>Only 1 PE active per row</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Overall Efficiency Estimate</strong> (across all operations):</p>
+<p><strong>Important Caveat</strong>: Efficiency estimates below assume best-case scenarios. Real-world efficiency typically much lower due to memory stalls, control overhead, and partial tile fills.</p>
+<table>
+<thead>
+<tr>
+<th>Batch Size</th>
+<th>Estimated Average Efficiency</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Batch = 1</strong></td>
+<td>&lt;10% realistic</td>
+<td>Includes ALL cycles: compute, DMA, idle, control</td>
+</tr>
+<tr>
+<td><strong>Batch = 4</strong></td>
+<td>~15-20% (estimate)</td>
+<td>Better amortization of overhead</td>
+</tr>
+<tr>
+<td><strong>Batch = 16</strong></td>
+<td>~30-40% (estimate)</td>
+<td>Theoretical limit with good scheduling</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>KEY INSIGHT</strong>: The low average efficiency includes DMA transfers, normalization, software operations, and all idle cycles. Individual convolution operations can achieve higher efficiency during their active execution phase. These are rough estimates that require validation through actual implementation and profiling.</p>
+</blockquote>
+<hr>
+<h3 id="53-memory-footprint"><strong>5.3 Memory Footprint</strong> </h3>
+<p><strong>Buffer Allocation</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Buffer</th>
+<th>Size</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ActBufA</strong></td>
+<td>32 KB</td>
+<td>Ping buffer for activations</td>
+</tr>
+<tr>
+<td><strong>ActBufB</strong></td>
+<td>32 KB</td>
+<td>Pong buffer for activations</td>
+</tr>
+<tr>
+<td><strong>WgtBuf</strong></td>
+<td>32 KB</td>
+<td>Weights (reused per layer)</td>
+</tr>
+<tr>
+<td><strong>PSumBuf</strong></td>
+<td>64 KB</td>
+<td>Partial sums (largest outputs)</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>160 KB</strong></td>
+<td>All layers fit with careful management</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Worst-Case Layer</strong> (Stage 3b MobileViT):</p>
+<ul>
+<li>Input: 48×32×32 = 49,152 elements = <strong>48 KB</strong></li>
+<li>Weights: 64×48×1×1 = 3,072 elements = <strong>3 KB</strong></li>
+<li>Output: 48×32×32 = 49,152 elements = <strong>48 KB</strong></li>
+<li>Transformer Q/K/V: 256×256 = 65,536 elements = <strong>64 KB</strong></li>
+<li><strong>Peak</strong>: 163 KB (slightly over, managed with ping-pong)</li>
+</ul>
+<p><strong>Conclusion</strong>: All stages fit with careful buffer management and ping-pong strategy.</p>
+<hr>
+<h3 id="54-bandwidth-analysis"><strong>5.4 Bandwidth Analysis</strong> </h3>
+<p><strong>Rough Estimation</strong>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Required Bandwidth (simplified calculation):
+  Total data: ~150 MB transferred throughout network (estimated)
+  Time: 2.626M cycles / 250 MHz = 10.5 ms
+  Naive: 150 MB / 10.5 ms = 14.3 GB/s (way too high - unrealistic)
+  
+With Ping-Pong Parallelism (assumed):
+  Loads can overlap with compute (if control logic works correctly)
+  Only writebacks are fully serial
+  Estimated effective need: ~2-3 GB/s average (rough guess)
+
+Available Bandwidth:
+  AXI: 64-bit @ 250 MHz = 2 GB/s per direction (read OR write)
+  Bidirectional: 4 GB/s total
+
+Estimated Utilization: 2.5 GB/s / 4 GB/s = ~60-65%
+</code></pre><p><strong>Important Caveats</strong>:</p>
+<ul>
+<li>These are <strong>very rough estimates</strong> based on simplified assumptions</li>
+<li>Actual bandwidth depends on:
+<ul>
+<li>Memory access patterns (sequential vs random)</li>
+<li>Ping-pong overlap efficiency (depends on control logic correctness)</li>
+<li>Burst efficiency on AXI bus</li>
+<li>Bank conflicts in memory subsystem</li>
+</ul>
+</li>
+<li><strong>Real bandwidth measurement</strong> requires:
+<ul>
+<li>Functional simulation with waveforms</li>
+<li>Monitoring AXI transaction rates</li>
+<li>Profiling actual data transfer patterns</li>
+</ul>
+</li>
+</ul>
+<p><strong>Conclusion</strong>: The 64-bit @ 250 MHz AXI interface (4 GB/s total) <strong>should theoretically be sufficient</strong> based on rough estimates, but this needs verification through simulation and actual measurement.</p>
+<hr>
+<h3 id="55-power-estimation"><strong>5.5 Power Estimation</strong> </h3>
+<p><strong>Component-Level Breakdown</strong> (rough estimates):</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Power</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Systolic Array</td>
+<td>2.5W</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>Memory Subsystem</td>
+<td>1.0W</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>DMA &amp; Interfaces</td>
+<td>0.8W</td>
+<td>16%</td>
+</tr>
+<tr>
+<td>Control Logic</td>
+<td>0.4W</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>Post-Processing</td>
+<td>0.3W</td>
+<td>6%</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>~5W</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes</strong>:</p>
+<ul>
+<li>These are rough estimates based on 28nm FPGA technology and typical power consumption patterns</li>
+<li>Actual power consumption can only be determined through FPGA synthesis and measurement</li>
+<li>Power analysis tools (Vivado Power Analyzer) will provide more accurate estimates post-synthesis</li>
+</ul>
+<hr>
+<h2 id="6-technical-implementation">6. Technical Implementation </h2>
+<h3 id="61-rtl-module-summary"><strong>6.1 RTL Module Summary</strong> </h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Lines of Code</th>
+<th>Function</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobilevit_accelerator_top.sv</code></td>
+<td>500</td>
+<td>Top-level integration</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>global_controller.sv</code></td>
+<td>800</td>
+<td>FSM orchestration</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>dma_wrapper.sv</code></td>
+<td>400</td>
+<td>AXI Master interface</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>memory_subsystem.sv</code></td>
+<td>600</td>
+<td>16-bank SRAM</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>Lego_Systolic_Array.sv</code></td>
+<td>2000</td>
+<td>Compute engine</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>post_processing_pipeline.sv</code></td>
+<td>300</td>
+<td>BN/Swish/LN</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>AGU.sv</code></td>
+<td>700</td>
+<td>Address generation</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>batch_norm.sv</code></td>
+<td>250</td>
+<td>Normalization</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>swish.sv</code></td>
+<td>200</td>
+<td>Activation</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><code>layer_norm1.sv</code> / <code>layer_norm2.sv</code></td>
+<td>400</td>
+<td>Normalization</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>~8,000</strong></td>
+<td>11 modules</td>
+<td><strong>100% Complete</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="62-global-controller-fsm"><strong>6.2 Global Controller FSM</strong> </h3>
+<p><strong>16 States</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Function</th>
+<th>Next State(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IDLE</strong></td>
+<td>Wait for descriptor</td>
+<td>DECODE</td>
+</tr>
+<tr>
+<td><strong>DECODE</strong></td>
+<td>Parse layer type</td>
+<td>LOAD_ACT, LOAD_WGT</td>
+</tr>
+<tr>
+<td><strong>LOAD_ACT</strong></td>
+<td>DMA load activations</td>
+<td>LOAD_WGT (if needed), COMPUTE</td>
+</tr>
+<tr>
+<td><strong>LOAD_WGT</strong></td>
+<td>DMA load weights</td>
+<td>COMPUTE</td>
+</tr>
+<tr>
+<td><strong>COMPUTE</strong></td>
+<td>SA execution</td>
+<td>ACCUMULATE, POST_PROC</td>
+</tr>
+<tr>
+<td><strong>ACCUMULATE</strong></td>
+<td>Multi-tile accumulation</td>
+<td>COMPUTE (next tile), POST_PROC</td>
+</tr>
+<tr>
+<td><strong>POST_PROC</strong></td>
+<td>BN/Swish/LN pipeline</td>
+<td>WRITEBACK</td>
+</tr>
+<tr>
+<td><strong>WRITEBACK</strong></td>
+<td>DMA write results</td>
+<td>NEXT_TILE, DONE</td>
+</tr>
+<tr>
+<td><strong>NEXT_TILE</strong></td>
+<td>Tile loop control</td>
+<td>LOAD_ACT</td>
+</tr>
+<tr>
+<td><strong>DONE</strong></td>
+<td>Layer complete</td>
+<td>IDLE</td>
+</tr>
+<tr>
+<td><strong>(6 more states for special cases)</strong></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Ping-pong buffer management</li>
+<li>Multi-tile accumulation tracking</li>
+<li>Post-processing bypass control</li>
+<li>Error handling and timeout</li>
+</ul>
+<hr>
+<h3 id="63-systolic-array-details"><strong>6.3 Systolic Array Details</strong> </h3>
+<p><strong>Base Configuration</strong>: 16×16 PEs</p>
+<p><strong>Lego Modes</strong> (runtime reconfigurable):</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Array Size</th>
+<th>Use Case</th>
+<th>Efficiency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type 0</strong></td>
+<td>16×64</td>
+<td>Conv 3×3, large channels</td>
+<td>85-95%</td>
+</tr>
+<tr>
+<td><strong>Type 1</strong></td>
+<td>32×32</td>
+<td>Balanced convolutions</td>
+<td>75-85%</td>
+</tr>
+<tr>
+<td><strong>Type 2</strong></td>
+<td>64×16</td>
+<td>Conv 1×1, pointwise</td>
+<td>60-75%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dataflow</strong>: Weight-stationary</p>
+<ul>
+<li>Weights loaded once, reused for all spatial positions</li>
+<li>Activations stream through PEs</li>
+<li>Partial sums accumulate vertically</li>
+</ul>
+<p><strong>Peak Performance</strong>:</p>
+<ul>
+<li>256 MACs/cycle (16×16)</li>
+<li>250 MHz clock</li>
+<li><strong>64 GOPS</strong> (INT8)</li>
+</ul>
+<hr>
+<h3 id="64-memory-subsystem"><strong>6.4 Memory Subsystem</strong> </h3>
+<p><strong>16-Bank Architecture</strong>:</p>
+<pre data-role="codeBlock" data-info="systemverilog" class="language-systemverilog systemverilog"><code>// Bank interleaving on DMA write
+bank_id = addr[3:0];     // Lower 4 bits
+word_addr = addr[19:4];  // Upper 16 bits
+
+// Parallel read on AGU access
+for (i = 0; i &lt; num_banks_active; i++) begin
+    data_out[i] = bank[i][addr];  // All banks read simultaneously
+end
+
+// Variable bank activation
+case (sa_type)
+    2'b00: num_banks = 16;  // 64 elements/cycle
+    2'b01: num_banks = 8;   // 32 elements/cycle
+    2'b10: num_banks = 4;   // 16 elements/cycle
+endcase
+</code></pre><p><strong>Benefits</strong>:</p>
+<ul>
+<li>Single-cycle tile reads</li>
+<li>FPGA-optimized (16 BRAM ports)</li>
+<li>Power-efficient (only active banks read)</li>
+</ul>
+<hr>
+<h2 id="7-verification-strategy">7. Verification Strategy </h2>
+<h3 id="four-phase-approach"><strong>Four-Phase Approach</strong> </h3>
+<h4 id="phase-1-unit-testing"><strong>Phase 1: Unit Testing</strong> </h4>
+<ul>
+<li>Individual module testbenches written</li>
+<li>Basic functional verification of each component</li>
+<li>Corner case testing (edge values, overflows)</li>
+<li><strong>Status</strong>: Testbench code written, systematic testing in progress</li>
+</ul>
+<h4 id="phase-2-integration-testing-planned"><strong>Phase 2: Integration Testing</strong> (Planned) </h4>
+<ul>
+<li>Single convolution layer end-to-end simulation</li>
+<li>Multi-tile accumulation verification</li>
+<li>Ping-pong buffer operation validation</li>
+<li>Full MobileViT block (MV2 + transformer) test</li>
+</ul>
+<h4 id="phase-3-system-testing-planned"><strong>Phase 3: System Testing</strong> (Planned) </h4>
+<ul>
+<li>Complete MobileViT-XXS network simulation</li>
+<li>Output comparison with PyTorch golden reference</li>
+<li>Actual cycle count measurement (vs estimates)</li>
+<li>Memory footprint verification</li>
+</ul>
+<h4 id="phase-4-fpga-validation-future-work"><strong>Phase 4: FPGA Validation</strong> (Future Work) </h4>
+<ul>
+<li>Synthesize to Xilinx Zynq UltraScale+ (or available FPGA)</li>
+<li>Timing closure @ 250 MHz (realistic target for memory interface)</li>
+<li>Real performance measurement (actual GOPS, FPS, power)</li>
+<li>Bottleneck profiling and optimization</li>
+</ul>
+<hr>
+<h3 id="golden-reference"><strong>Golden Reference</strong> </h3>
+<p><strong>Python Model</strong>: <code>mobile-vit-acc3_official.py</code></p>
+<ul>
+<li>PyTorch implementation of MobileViT-XXS</li>
+<li>Layer-by-layer output capture</li>
+<li>Bit-accurate comparison with hardware</li>
+<li>Validation dataset: ImageNet subset</li>
+</ul>
+<hr>
+<h2 id="8-design-achievements--status">8. Design Achievements &amp; Status </h2>
+<h3 id="81-design-completeness"><strong>8.1 Design Completeness</strong> </h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Target</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RTL Modules</strong></td>
+<td>11</td>
+<td>✅ RTL Written</td>
+<td>All modules coded</td>
+</tr>
+<tr>
+<td><strong>Hardware Coverage</strong></td>
+<td>Major MobileViT ops</td>
+<td>✅ ~85% HW</td>
+<td>Softmax, Residual in SW</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>Comprehensive</td>
+<td>✅ Complete</td>
+<td>7 docs, 15,000+ words</td>
+</tr>
+<tr>
+<td><strong>Testbenches</strong></td>
+<td>Unit tests</td>
+<td>⏳ In Progress</td>
+<td>11 testbenches written</td>
+</tr>
+<tr>
+<td><strong>Integration Tests</strong></td>
+<td>Full system</td>
+<td>⏳ Pending</td>
+<td>Requires simulation</td>
+</tr>
+<tr>
+<td><strong>FPGA Synthesis</strong></td>
+<td>250 MHz target</td>
+<td>⏳ Not Started</td>
+<td>Future work</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What We Completed</strong>:</p>
+<ul>
+<li>✅ Complete RTL design (~8,000 lines of SystemVerilog)</li>
+<li>✅ Architectural documentation with design rationale</li>
+<li>✅ Unit testbench structure</li>
+<li>✅ Golden reference Python model</li>
+</ul>
+<p><strong>What Remains</strong>:</p>
+<ul>
+<li>⏳ Functional simulation and verification</li>
+<li>⏳ FPGA synthesis and timing closure</li>
+<li>⏳ Performance measurement and validation</li>
+<li>⏳ Power analysis and optimization</li>
+</ul>
+<hr>
+<h3 id="82-learning-outcomes"><strong>8.2 Learning Outcomes</strong> </h3>
+<p>Through this research project, we gained hands-on experience in:</p>
+<ol>
+<li>
+<p><strong>MobileViT Accelerator Architecture</strong></p>
+<ul>
+<li>Studied hybrid CNN-Transformer acceleration challenges</li>
+<li>Designed complete RTL implementation</li>
+<li>Learned trade-offs in hardware design decisions</li>
+</ul>
+</li>
+<li>
+<p><strong>Memory System Design</strong></p>
+<ul>
+<li>16-bank architecture for parallel access</li>
+<li>Banking strategy and address interleaving</li>
+<li>Ping-pong buffering for overlap</li>
+</ul>
+</li>
+<li>
+<p><strong>SystemVerilog RTL Design</strong></p>
+<ul>
+<li>~8,000 lines of synthesizable code</li>
+<li>Modular design with clear interfaces</li>
+<li>Design for testability</li>
+</ul>
+</li>
+<li>
+<p><strong>Hardware-Software Co-Design</strong></p>
+<ul>
+<li>Descriptor-based programming interface</li>
+<li>Hardware/software partitioning decisions</li>
+<li>Understanding acceleration limits</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Modeling</strong></p>
+<ul>
+<li>Cycle estimation methodologies</li>
+<li>Bandwidth analysis</li>
+<li>Bottleneck identification</li>
+</ul>
+</li>
+<li>
+<p><strong>Technical Communication</strong></p>
+<ul>
+<li>Comprehensive documentation (15,000+ words)</li>
+<li>Design decision justification</li>
+<li>Architecture visualization</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="9-limitations--future-work">9. Limitations &amp; Future Work </h2>
+<h3 id="91-current-limitations"><strong>9.1 Current Limitations</strong> </h3>
+<table>
+<thead>
+<tr>
+<th>Limitation</th>
+<th>Impact</th>
+<th>Potential Solution</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Softmax in software</strong></td>
+<td>Estimated +4.3 ms if moved to HW</td>
+<td>Could add PWL Softmax unit</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td><strong>No hardware residual add</strong></td>
+<td>SW stitching needed</td>
+<td>Could add simple ALU</td>
+<td>LOW</td>
+</tr>
+<tr>
+<td><strong>Layer Norm single-unit</strong></td>
+<td>Potential bottleneck</td>
+<td>Could add 2nd parallel unit</td>
+<td>LOW</td>
+</tr>
+<tr>
+<td><strong>Global Pool needs workaround</strong></td>
+<td>Extra control logic</td>
+<td>Use SA with all-1s weights</td>
+<td>LOW</td>
+</tr>
+<tr>
+<td><strong>Verification incomplete</strong></td>
+<td>Unproven functionality</td>
+<td>Complete sim &amp; FPGA testing</td>
+<td>HIGH</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="92-future-enhancements"><strong>9.2 Future Enhancements</strong> </h3>
+<h4 id="next-steps-for-completion"><strong>Next Steps for Completion</strong> </h4>
+<ol>
+<li>
+<p><strong>Functional Verification</strong></p>
+<ul>
+<li>Run RTL simulations with test vectors</li>
+<li>Validate against PyTorch golden reference</li>
+<li>Measure actual vs estimated cycle counts</li>
+<li>Debug and fix issues</li>
+</ul>
+</li>
+<li>
+<p><strong>FPGA Implementation</strong></p>
+<ul>
+<li>Synthesize design for target FPGA</li>
+<li>Work on timing closure @ 250 MHz</li>
+<li>Implement on-board testing infrastructure</li>
+<li>Measure real performance</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Optimization</strong></p>
+<ul>
+<li>Profile actual bottlenecks (may differ from estimates)</li>
+<li>Optimize critical paths based on synthesis results</li>
+<li>Tune memory access patterns</li>
+<li>Investigate batch processing benefits</li>
+</ul>
+</li>
+</ol>
+<h4 id="possible-enhancements-if-time-permits"><strong>Possible Enhancements</strong> (if time permits) </h4>
+<ol>
+<li>
+<p><strong>Hardware Softmax</strong></p>
+<ul>
+<li>Piecewise linear approximation (PWL)</li>
+<li>Could potentially reduce CPU overhead</li>
+</ul>
+</li>
+<li>
+<p><strong>Additional Layer Support</strong></p>
+<ul>
+<li>Hardware residual addition</li>
+<li>More normalization variants</li>
+</ul>
+</li>
+<li>
+<p><strong>Model Scaling</strong></p>
+<ul>
+<li>Support for MobileViT-S, MobileViT-XS</li>
+<li>Would require memory capacity planning</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="10-conclusion">10. Conclusion </h2>
+<h3 id="project-summary"><strong>Project Summary</strong> </h3>
+<p>This graduation/research project presents a <strong>hardware accelerator design</strong> for the MobileViT-XXS neural network, focusing on RTL architecture and design methodology.</p>
+<h3 id="key-design-contributions"><strong>Key Design Contributions</strong> </h3>
+<ol>
+<li><strong>Descriptor-Driven Architecture</strong>: Clean hardware-software interface inspired by industrial ML accelerators</li>
+<li><strong>16-Bank Memory Subsystem</strong>: FPGA-optimized parallel memory access design</li>
+<li><strong>Ping-Pong Buffering Strategy</strong>: Designed for DMA/compute overlap to hide transfer latency</li>
+<li><strong>Integrated Post-Processing</strong>: On-chip normalization and activation fusion</li>
+<li><strong>Comprehensive Documentation</strong>: Detailed design rationale, performance analysis, and architectural decisions</li>
+</ol>
+<hr>
+<h3 id="project-status--outcomes"><strong>Project Status &amp; Outcomes</strong> </h3>
+<p><strong>Completed Work</strong>:</p>
+<ul>
+<li>✅ <strong>RTL Design</strong>: ~8,000 lines of SystemVerilog across 11 modules</li>
+<li>✅ <strong>Architecture Documentation</strong>: 7 documents with 15,000+ words covering design decisions</li>
+<li>✅ <strong>Performance Modeling</strong>: Cycle estimation and bandwidth analysis methodology</li>
+<li>✅ <strong>Testbench Structure</strong>: Unit test framework for all modules</li>
+</ul>
+<p><strong>Remaining Work</strong>:</p>
+<ul>
+<li>⏳ <strong>Functional Verification</strong>: RTL simulation and validation against golden reference</li>
+<li>⏳ <strong>FPGA Synthesis</strong>: Timing closure and resource utilization</li>
+<li>⏳ <strong>Performance Measurement</strong>: Actual cycle counts, throughput, and power</li>
+<li>⏳ <strong>Optimization</strong>: Based on profiling real bottlenecks</li>
+</ul>
+<h3 id="research-value"><strong>Research Value</strong> </h3>
+<p>This project demonstrates:</p>
+<ul>
+<li><strong>Architectural thinking</strong> for ML accelerator design</li>
+<li><strong>Design methodology</strong> from specification to RTL implementation</li>
+<li><strong>Performance estimation</strong> techniques for hardware design</li>
+<li><strong>Documentation skills</strong> for complex digital systems</li>
+</ul>
+<h3 id="realistic-assessment"><strong>Realistic Assessment</strong> </h3>
+<p><strong>Strengths</strong>:</p>
+<ul>
+<li>Comprehensive design with clear architectural decisions</li>
+<li>Well-documented rationale for each major choice</li>
+<li>Modular, potentially synthesizable RTL code</li>
+<li>Realistic targets for student FPGA project</li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul>
+<li>Performance numbers are <strong>theoretical estimates only</strong></li>
+<li>No functional verification completed yet</li>
+<li>Actual performance may differ significantly from estimates</li>
+<li>Optimization opportunities only identified, not implemented</li>
+</ul>
+<hr>
+<h2 id="appendix-quick-reference">Appendix: Quick Reference </h2>
+<h3 id="design-specifications"><strong>Design Specifications</strong> </h3>
+<ul>
+<li><strong>Target Network</strong>: MobileViT-XXS (256×256×3 → 1×1×1000)</li>
+<li><strong>Compute Engine</strong>: 16×16 Systolic Array (INT8)</li>
+<li><strong>On-Chip Memory</strong>: 160 KB SRAM (16-bank architecture)</li>
+<li><strong>External Interface</strong>: 64-bit AXI @ 250 MHz target</li>
+<li><strong>Control</strong>: Descriptor-driven (256-bit descriptors)</li>
+</ul>
+<h3 id="estimated-performance-theoretical"><strong>Estimated Performance (Theoretical)</strong> </h3>
+<ul>
+<li><strong>Latency</strong>: ~10.5 ms @ 250 MHz (idealized cycle count)</li>
+<li><strong>Peak Throughput</strong>: 64 GOPS (256 MACs × 250 MHz)</li>
+<li><strong>FPS</strong>: ~95 FPS (continuous feed assumption)</li>
+<li><strong>Memory</strong>: 160 KB on-chip designed capacity</li>
+<li><strong>Bandwidth</strong>: ~2.5 GB/s average estimated need</li>
+</ul>
+<p><strong>⚠️ Important</strong>: These are design-time estimates assuming ideal conditions. Actual numbers require FPGA implementation and measurement.</p>
+<h3 id="rtl-module-summary"><strong>RTL Module Summary</strong> </h3>
+<ul>
+<li><strong>11 RTL modules</strong>: ~8,000 lines total</li>
+<li><strong>16-bank memory</strong>: 32-bit width per bank</li>
+<li><strong>Systolic array</strong>: 16×16 PEs, Lego reconfigurable</li>
+<li><strong>Post-processing</strong>: BN → Swish → LayerNorm (3-stage pipeline)</li>
+<li><strong>Interface</strong>: AXI4 Master for external memory access</li>
+</ul>
+<h3 id="documentation"><strong>Documentation</strong> </h3>
+<ol>
+<li><strong>EXECUTIVE_SUMMARY.md</strong> - One-page overview</li>
+<li><strong>DOCUMENTATION_GUIDE.md</strong> - Key decisions and justification</li>
+<li><strong>IMPLEMENTATION_GUIDE.md</strong> - Complete architecture details</li>
+<li><strong>MEMORY_BANKING_ARCHITECTURE.md</strong> - 16-bank design</li>
+<li><strong>COMPLETE_DATA_FLOW_GUIDE.md</strong> - Cycle-accurate walkthrough</li>
+<li><strong>OPERATIONS_TABLE_AND_HARDWARE_FLOW.md</strong> - All 150+ operations</li>
+<li><strong>READING_ORDER.md</strong> - Documentation navigation guide</li>
+</ol>
+<hr>
+<p><strong>End of Presentation</strong></p>
+<p>Thank you for reviewing our MobileViT Hardware Accelerator design.</p>
+<p><em>For detailed technical information, please refer to the complete documentation package.</em></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
