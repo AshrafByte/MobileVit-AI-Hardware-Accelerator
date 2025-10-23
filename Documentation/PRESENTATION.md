@@ -5,33 +5,6 @@
 
 ---
 
-## ⚠️ Research Project Disclaimer
-
-**This is a student graduation/research project focused on RTL design and hardware architecture exploration.**
-
-**Project Status**:
-- ✅ RTL design completed (~8,000 lines of SystemVerilog)
-- ✅ Architecture documented with design decisions
-- ⏳ Functional simulation pending
-- ⏳ FPGA synthesis and implementation not yet performed
-- ⏳ Performance measurements not yet obtained
-
-**All performance metrics in this document are theoretical estimates** based on:
-- Hand calculations of cycle counts
-- Idealized assumptions (no stalls, perfect ping-pong overlap, no handshaking delays)
-- Design parameters without real-world validation
-
-**Actual performance will differ** due to:
-- Pipeline stalls and bubbles
-- Memory access conflicts
-- Handshaking and control overhead
-- FPGA timing constraints
-- Real-world data dependencies
-
-This work represents our learning in digital design, computer architecture, and ML hardware acceleration concepts.
-
----
-
 ## Table of Contents
 
 1. [Executive Summary](#1-executive-summary)
